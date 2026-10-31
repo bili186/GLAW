@@ -154,6 +154,7 @@ During training, training-time Gaussian noise (`--noise_std=0.1`) is added to bo
 
 ---
 
+<!--
 ## Citation
 
 If you find this work useful, please consider citing:
@@ -168,6 +169,7 @@ If you find this work useful, please consider citing:
 ```
 
 (* corresponding author) This entry will be updated once the paper is published.
+-->
 
 ---
 
