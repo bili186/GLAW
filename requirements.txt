@@ -1,0 +1,17 @@
+# Core
+torch>=1.10
+torchvision
+numpy>=1.21
+PyYAML
+tqdm
+
+# CLIP tokenizer / text preprocessing
+ftfy
+regex
+
+# Experiment config and logging
+easydict
+prettytable
+
+# Image loading
+Pillow
