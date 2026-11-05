@@ -33,6 +33,18 @@ GLAW tackles **Text-Based Person Search (TBPS)** — retrieving person images fr
 
 ---
 
+## Retrieval Examples
+
+<p align="center">
+  <img src="figs/fig_retrieval.png" width="100%" alt="Text-to-image retrieval examples on RSTPReid">
+</p>
+
+Top-10 text-to-image retrieval results on RSTPReid. Green boxes mark images of the identity described
+by the query, red boxes mark different identities. The figure is also available as
+[PDF](figs/fig_retrieval.pdf).
+
+---
+
 ## Requirements
 
 - PyTorch >= 1.10 (CUDA build recommended)
