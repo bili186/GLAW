@@ -1,0 +1,162 @@
+[
+  {
+    "file": "frame-101.jpg",
+    "row": 1,
+    "rank": 1,
+    "correct": true,
+    "w": 211,
+    "h": 445
+  },
+  {
+    "file": "frame-102.jpg",
+    "row": 1,
+    "rank": 2,
+    "correct": true,
+    "w": 211,
+    "h": 445
+  },
+  {
+    "file": "frame-103.jpg",
+    "row": 1,
+    "rank": 3,
+    "correct": true,
+    "w": 211,
+    "h": 445
+  },
+  {
+    "file": "frame-104.jpg",
+    "row": 1,
+    "rank": 4,
+    "correct": false,
+    "w": 211,
+    "h": 445
+  },
+  {
+    "file": "frame-105.jpg",
+    "row": 1,
+    "rank": 5,
+    "correct": true,
+    "w": 211,
+    "h": 445
+  },
+  {
+    "file": "frame-106.jpg",
+    "row": 1,
+    "rank": 6,
+    "correct": false,
+    "w": 212,
+    "h": 445
+  },
+  {
+    "file": "frame-107.jpg",
+    "row": 1,
+    "rank": 7,
+    "correct": false,
+    "w": 211,
+    "h": 445
+  },
+  {
+    "file": "frame-108.jpg",
+    "row": 1,
+    "rank": 8,
+    "correct": false,
+    "w": 211,
+    "h": 445
+  },
+  {
+    "file": "frame-109.jpg",
+    "row": 1,
+    "rank": 9,
+    "correct": false,
+    "w": 211,
+    "h": 445
+  },
+  {
+    "file": "frame-110.jpg",
+    "row": 1,
+    "rank": 10,
+    "correct": true,
+    "w": 211,
+    "h": 445
+  },
+  {
+    "file": "frame-201.jpg",
+    "row": 2,
+    "rank": 1,
+    "correct": true,
+    "w": 211,
+    "h": 446
+  },
+  {
+    "file": "frame-202.jpg",
+    "row": 2,
+    "rank": 2,
+    "correct": true,
+    "w": 211,
+    "h": 446
+  },
+  {
+    "file": "frame-203.jpg",
+    "row": 2,
+    "rank": 3,
+    "correct": true,
+    "w": 211,
+    "h": 446
+  },
+  {
+    "file": "frame-204.jpg",
+    "row": 2,
+    "rank": 4,
+    "correct": false,
+    "w": 211,
+    "h": 446
+  },
+  {
+    "file": "frame-205.jpg",
+    "row": 2,
+    "rank": 5,
+    "correct": true,
+    "w": 211,
+    "h": 446
+  },
+  {
+    "file": "frame-206.jpg",
+    "row": 2,
+    "rank": 6,
+    "correct": true,
+    "w": 212,
+    "h": 446
+  },
+  {
+    "file": "frame-207.jpg",
+    "row": 2,
+    "rank": 7,
+    "correct": false,
+    "w": 211,
+    "h": 446
+  },
+  {
+    "file": "frame-208.jpg",
+    "row": 2,
+    "rank": 8,
+    "correct": false,
+    "w": 211,
+    "h": 446
+  },
+  {
+    "file": "frame-209.jpg",
+    "row": 2,
+    "rank": 9,
+    "correct": false,
+    "w": 211,
+    "h": 446
+  },
+  {
+    "file": "frame-210.jpg",
+    "row": 2,
+    "rank": 10,
+    "correct": false,
+    "w": 211,
+    "h": 446
+  }
+]

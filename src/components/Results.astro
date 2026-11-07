@@ -1,0 +1,51 @@
+---
+import { metrics } from '../data/content';
+---
+
+<section class="panel" id="results">
+  <div class="wrap">
+    <div class="panel__head">
+      <span class="panel__num">02</span>
+      <h2 class="panel__title">Results</h2>
+      <p class="mono panel__aside">text-to-image retrieval, official test splits</p>
+    </div>
+
+    <div class="block">
+      <div class="table-wrap">
+        <table class="metrics">
+          <caption class="mono" style="text-align:left;color:var(--sheet-muted);padding-bottom:0.7rem">
+            R@K in %, single model, no re-ranking
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Dataset</th>
+              <th scope="col">R@1</th>
+              <th scope="col">R@5</th>
+              <th scope="col">R@10</th>
+              <th scope="col">mAP</th>
+              <th scope="col">mINP</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              metrics.map((m) => (
+                <tr>
+                  <th scope="row">{m.dataset}</th>
+                  <td class="lead">{m.r1}</td>
+                  <td>{m.r5}</td>
+                  <td>{m.r10}</td>
+                  <td>{m.map}</td>
+                  <td>{m.minp}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="block__note">
+        Numbers as reported in the manuscript. Every value is produced by the released code with the
+        configuration in the repository README.
+      </p>
+    </div>
+  </div>
+</section>

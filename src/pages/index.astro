@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import Sheet from '../components/Sheet.astro';
+import Method from '../components/Method.astro';
+import Results from '../components/Results.astro';
+import Run from '../components/Run.astro';
+import Closing from '../components/Closing.astro';
+import { SITE } from '../data/content';
+---
+
+<Base title={SITE.title} description={SITE.description}>
+  <main>
+    <Sheet />
+    <Method />
+    <Results />
+    <Run />
+    <Closing />
+  </main>
+</Base>

@@ -1,0 +1,125 @@
+---
+import { mechanisms } from '../data/content';
+---
+
+<section class="panel" id="method">
+  <div class="wrap">
+    <div class="panel__head">
+      <span class="panel__num">01</span>
+      <h2 class="panel__title">Mechanism</h2>
+      <p class="mono panel__aside">four parts, one forward pass</p>
+    </div>
+
+    <div class="spec">
+      {
+        mechanisms.map((m) => (
+          <div class="spec__row">
+            <div class="spec__name">
+              {m.name}
+              <small>{m.sub}</small>
+            </div>
+            <p class="spec__text" set:html={m.body} />
+          </div>
+        ))
+      }
+    </div>
+
+    <figure class="pipeline">
+      <svg viewBox="0 0 900 420" role="img" aria-labelledby="pipe-title pipe-desc">
+        <title id="pipe-title">GLAW forward pass</title>
+        <desc id="pipe-desc">
+          A person image and a text description pass through the CLIP ViT-B/16 image encoder and the
+          CLIP text transformer. Cross-modal attention ranks the patches and tokens, retaining the top
+          30 percent for a local branch while everything feeds a global branch. Both branches are
+          optimised by the GLAW loss, with feature denoising regularisation and a centroid loss.
+        </desc>
+
+        <defs>
+          <marker
+            id="arw"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="#38527d"></path>
+          </marker>
+        </defs>
+
+        <!-- inputs -->
+        <rect class="box" x="40" y="16" width="170" height="52"></rect>
+        <text x="125" y="47" text-anchor="middle">person image</text>
+
+        <rect class="box" x="690" y="16" width="170" height="52"></rect>
+        <text x="775" y="47" text-anchor="middle">description</text>
+
+        <!-- encoders -->
+        <rect class="box" x="40" y="104" width="170" height="62"></rect>
+        <text x="125" y="131" text-anchor="middle">CLIP ViT-B/16</text>
+        <text class="sub" x="125" y="149" text-anchor="middle">image encoder</text>
+
+        <rect class="box" x="690" y="104" width="170" height="62"></rect>
+        <text x="775" y="131" text-anchor="middle">CLIP text</text>
+        <text class="sub" x="775" y="149" text-anchor="middle">transformer</text>
+
+        <!-- wires into encoders -->
+        <line class="wire" x1="125" y1="68" x2="125" y2="98" marker-end="url(#arw)"></line>
+        <line class="wire" x1="775" y1="68" x2="775" y2="98" marker-end="url(#arw)"></line>
+
+        <!-- CMATS -->
+        <rect class="box box--sel" x="250" y="96" width="400" height="84"></rect>
+        <text x="450" y="124" text-anchor="middle">CMATS</text>
+        <text class="sub" x="450" y="142" text-anchor="middle">
+          cross-modal attention · top 30% kept
+        </text>
+        <g>
+          {
+            Array.from({ length: 10 }).map((_, i) => (
+              <rect
+                x={392 + i * 12}
+                y="154"
+                width="8"
+                height="8"
+                fill={[1, 4, 7].includes(i) ? 'var(--select)' : 'none'}
+                stroke="#38527d"
+                stroke-width="1"
+              />
+            ))
+          }
+        </g>
+
+        <line class="wire" x1="210" y1="135" x2="244" y2="135" marker-end="url(#arw)"></line>
+        <line class="wire" x1="690" y1="135" x2="656" y2="135" marker-end="url(#arw)"></line>
+
+        <!-- features -->
+        <line class="wire" x1="450" y1="180" x2="450" y2="240" marker-end="url(#arw)"></line>
+        <rect class="box" x="250" y="246" width="400" height="56"></rect>
+        <text x="450" y="271" text-anchor="middle">global + local features</text>
+        <text class="sub" x="450" y="289" text-anchor="middle">all tokens · selected tokens</text>
+
+        <!-- losses -->
+        <line class="wire" x1="450" y1="302" x2="450" y2="326"></line>
+        <line class="wire" x1="165" y1="326" x2="735" y2="326"></line>
+        <line class="wire" x1="165" y1="326" x2="165" y2="346" marker-end="url(#arw)"></line>
+        <line class="wire" x1="450" y1="326" x2="450" y2="346" marker-end="url(#arw)"></line>
+        <line class="wire" x1="735" y1="326" x2="735" y2="346" marker-end="url(#arw)"></line>
+
+        <rect class="box" x="40" y="352" width="250" height="52"></rect>
+        <text x="165" y="383" text-anchor="middle">GLAW loss</text>
+
+        <rect class="box" x="325" y="352" width="250" height="52"></rect>
+        <text x="450" y="383" text-anchor="middle">FDR</text>
+
+        <rect class="box" x="610" y="352" width="250" height="52"></rect>
+        <text x="735" y="383" text-anchor="middle">centroid loss</text>
+      </svg>
+      <figcaption>
+        Selection sits between the encoders and the feature that is classified: cross-modal attention
+        ranks both modalities, the top 30% feed the local branch, and the global branch keeps
+        everything. All three losses are computed in the same forward pass.
+      </figcaption>
+    </figure>
+  </div>
+</section>

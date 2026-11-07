@@ -1,0 +1,41 @@
+---
+import { SITE } from '../data/content';
+---
+
+<section class="panel" id="cite">
+  <div class="wrap">
+    <div class="panel__head">
+      <span class="panel__num">04</span>
+      <h2 class="panel__title">Cite</h2>
+    </div>
+
+    <div class="cite">
+      <div class="cite__stamp">
+        In review
+        <small>no venue, no DOI, no arXiv id yet</small>
+      </div>
+      <div>
+        <p>
+          The manuscript is under review, so there is nothing citable yet. Rather than publish a
+          reference that will change, this page carries none.
+        </p>
+        <p>
+          A BibTeX entry will appear here on acceptance. Until then, cite the code:
+          <a href={SITE.repo} style="color:var(--select)">github.com/bili186/GLAW</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="foot">
+    <p class="mono" style="margin:0">
+      MIT licensed · built on <a href="https://github.com/openai/CLIP">OpenAI CLIP</a>
+    </p>
+    <p class="mono" style="margin:0">
+      <a href={SITE.repo}>repository</a> · <a href="#method">method</a> ·
+      <a href="#results">results</a>
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,56 @@
+---
+const trainCmd = `pip install -r requirements.txt
+
+python train.py \\
+  --name GLAW --dataset_name RSTPReid --loss_names glaw \\
+  --num_epoch 60 --batch_size 64 --lr 5e-6 \\
+  --temperature 0.02 --tau 0.015 --margin 0.1 \\
+  --select_ratio 0.3 --cm_alpha 0.5 \\
+  --fdr_weight 1.0 --noise_std 0.1 \\
+  --centroid_weight 0.5 --centroid_momentum 0.99 \\
+  --img_aug --txt_aug --root_dir data`;
+
+const evalCmd = `python test.py \\
+  --config_file logs/RSTPReid/<run>/configs.yaml`;
+---
+
+<section class="panel" id="run">
+  <div class="wrap">
+    <div class="panel__head">
+      <span class="panel__num">03</span>
+      <h2 class="panel__title">Run it</h2>
+      <p class="mono panel__aside">CLIP ViT-B/16 · 60 epochs</p>
+    </div>
+
+    <div class="run__grid">
+      <div class="cmd">
+        <pre><span class="c"># train, RSTPReid</span>
+{trainCmd}
+
+<span class="c"># evaluate the best checkpoint</span>
+{evalCmd}</pre>
+      </div>
+
+      <ul class="run__notes">
+        <li>
+          <span>Backbone</span>
+          <span>OpenAI CLIP ViT-B/16; weights are fetched by the <code>clip</code> package on first use.</span>
+        </li>
+        <li>
+          <span>Data</span>
+          <span
+            >Place the datasets under <code>data/</code> as described in the README; images at
+            384 × 128, annotations read from each dataset's JSON.</span
+          >
+        </li>
+        <li>
+          <span>Eval</span>
+          <span
+            >Every epoch writes <code>configs.yaml</code> next to the checkpoints, which
+            <code>test.py</code> reads directly.</span
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
