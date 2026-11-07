@@ -1,41 +1,3 @@
-@font-face {
-  font-family: 'Big Shoulders';
-  src: url('/GLAW/fonts/BigShoulders-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Big Shoulders';
-  src: url('/GLAW/fonts/BigShoulders-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Work Sans';
-  src: url('/GLAW/fonts/WorkSans-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Work Sans';
-  src: url('/GLAW/fonts/WorkSans-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Work Sans';
-  src: url('/GLAW/fonts/WorkSans-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'DM Mono';
-  src: url('/GLAW/fonts/DMMono-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-display: swap;
-}
-
 :root {
   /* the dark table the sheet is laid on */
   --navy-900: #070e1a;
@@ -60,9 +22,9 @@
   --select-deep: #0284c7;
   --select-ink: #0b5c86;
 
-  --font-display: 'Big Shoulders', 'Haettenschweiler', 'Arial Narrow', sans-serif;
-  --font-body: 'Work Sans', system-ui, -apple-system, sans-serif;
-  --font-mono: 'DM Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --font-display: 'Times New Roman', Times, 'Liberation Serif', 'Tinos', serif;
+  --font-body: 'Times New Roman', Times, 'Liberation Serif', 'Tinos', serif;
+  --font-mono: 'Times New Roman', Times, 'Liberation Serif', 'Tinos', serif;
 
   --wrap: 1240px;
   --gutter: clamp(1rem, 3.6vw, 3rem);
@@ -84,8 +46,8 @@ body {
   background: var(--navy-800);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: 1.0625rem;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -141,8 +103,8 @@ a {
 
 .mono {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.09em;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   line-height: 1.5;
 }
@@ -191,8 +153,8 @@ a {
 .sheet__mark b {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: 0.16em;
+  font-size: 1.2rem;
+  letter-spacing: 0.18em;
 }
 
 .sheet__data {
@@ -207,12 +169,12 @@ a {
 
 .claim {
   margin: 0;
-  max-width: 21ch;
+  max-width: 26ch;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2.35rem, 6.4vw, 4.6rem);
-  line-height: 0.9;
-  letter-spacing: -0.005em;
+  font-size: clamp(2.1rem, 5.4vw, 4.05rem);
+  line-height: 1.02;
+  letter-spacing: -0.012em;
   text-wrap: balance;
 }
 
@@ -258,8 +220,8 @@ a {
   gap: 0.5rem;
   padding: 0.62rem 1.05rem;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
   border: 1px solid var(--sheet-ink);
@@ -321,10 +283,10 @@ a {
 
 .strip__text {
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--sheet-ink);
-  max-width: 92ch;
+  max-width: 84ch;
   text-wrap: pretty;
 }
 
@@ -360,8 +322,8 @@ a {
   display: block;
   margin-top: 3px;
   font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.06em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
   color: var(--sheet-muted);
   text-align: left;
 }
@@ -478,9 +440,9 @@ a {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
-  line-height: 1;
-  letter-spacing: 0.005em;
+  font-size: clamp(1.7rem, 3.1vw, 2.35rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
 
 .panel__aside {
@@ -509,8 +471,8 @@ a {
 
 .spec__name {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.07em;
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--select);
 }
@@ -519,9 +481,10 @@ a {
   display: block;
   margin-top: 0.2rem;
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   letter-spacing: 0;
   text-transform: none;
+  font-style: italic;
   color: var(--ink-muted);
 }
 
@@ -550,15 +513,17 @@ a {
 
 .pipeline svg text {
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 13px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   fill: var(--ink);
 }
 
 .pipeline svg text.sub {
   fill: var(--ink-muted);
-  font-size: 10.5px;
+  font-size: 11.5px;
+  text-transform: none;
+  font-style: italic;
 }
 
 .pipeline svg .box {
@@ -584,9 +549,9 @@ a {
 .pipeline figcaption {
   margin-top: 0.9rem;
   color: var(--ink-muted);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   line-height: 1.55;
-  max-width: 78ch;
+  max-width: 72ch;
 }
 
 /* ---------- results ---------- */
@@ -627,8 +592,8 @@ table.metrics td:first-child {
 
 table.metrics thead th {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   font-weight: 400;
   color: var(--sheet-muted);
@@ -637,14 +602,14 @@ table.metrics thead th {
 
 table.metrics tbody td {
   font-family: var(--font-mono);
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   border-bottom: 1px solid var(--sheet-rule);
 }
 
 table.metrics tbody th {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   border-bottom: 1px solid var(--sheet-rule);
 }
 
@@ -661,7 +626,7 @@ table.metrics td.lead {
 .block__note {
   margin: 0.9rem 0 0;
   color: var(--sheet-muted);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   line-height: 1.5;
 }
 
@@ -677,8 +642,8 @@ table.metrics td.lead {
 .cmd pre {
   margin: 0;
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  line-height: 1.8;
+  font-size: 0.875rem;
+  line-height: 1.75;
   color: #cddaea;
 }
 
@@ -707,18 +672,18 @@ table.metrics td.lead {
 
 .run__notes li {
   display: grid;
-  grid-template-columns: 5.5rem minmax(0, 1fr);
+  grid-template-columns: 6rem minmax(0, 1fr);
   gap: 0.9rem;
   padding-top: 0.7rem;
   border-top: 1px solid var(--rule);
   color: #dbe3ee;
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 .run__notes li span:first-child {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--ink-muted);
   padding-top: 0.2rem;
@@ -747,19 +712,21 @@ code {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(1.5rem, 3vw, 2.1rem);
-  line-height: 1;
-  letter-spacing: 0.06em;
+  line-height: 1.1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   text-align: center;
   max-width: 22rem;
 }
 
 .cite__stamp small {
   display: block;
-  margin-top: 0.5rem;
+  margin-top: 0.55rem;
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 400;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
+  text-transform: none;
   color: var(--ink-muted);
 }
 

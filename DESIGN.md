@@ -31,13 +31,15 @@ is carried by weight and rule, never by a second accent colour.
 
 ## Type
 
-Three voices, three jobs — never mixed within one element.
+One family, three sizes of voice: **Times New Roman** throughout (`Times`, `Liberation Serif`,
+`Tinos`, `serif` as fallbacks). The sheet is a printed page, so its type is the type of a printed
+page — no display grotesk, no mono, no webfont fetched at runtime.
 
-- **Display: Big Shoulders** (condensed industrial grotesk). The job title and section names only.
-  It reads as stamped lettering on a printed sheet rather than as a web headline.
-- **Body: Work Sans.** Mechanism copy, captions, notes.
-- **Data: DM Mono.** Frame numbers, metrics, commands, keys. Everything a machine or a hand would
-  have written in the margin.
+- **Display:** the family at `clamp(2.1rem, 5.4vw, 4.05rem)`, leading `1.02`, tracking `-.012em`.
+  The title and section names only.
+- **Body:** the same family at `1.0625rem/1.6` for mechanism copy, captions and notes.
+- **Data:** the same family, uppercase at `0.75rem` with `0.05em` tracking, for frame numbers,
+  metrics, keys and commands. Separated by size, tracking and colour — not by family.
 
 Hierarchy is size, weight and rule — no letterspaced eyebrow labels above headings.
 
@@ -47,8 +49,8 @@ A 1240px sheet inside a dark ground, with a printed header band (mark left, run 
 title is flush left at display size, then byline, then the two actions, then the strips.
 
 Frames sit in a 10-column grid, 5px gutters, reflowing to 5 columns below 720px so a frame is never
-cut in half. Sections are numbered `01`–`04` in mono at the left of a rule; the section name is the
-only thing in display type on that line.
+cut in half. Sections are numbered `01`–`04` in small uppercase type at the left of a rule; the
+section name is the only thing in display size on that line.
 
 ## Marks and motion
 
@@ -59,8 +61,8 @@ only thing in display type on that line.
 
 ## Constraints worth remembering
 
-- Fonts are declared with absolute paths (`/GLAW/fonts/...`) because the site is served from a
-  project subpath. If `base` in `astro.config.mjs` changes, these five paths must change with it.
+- Nothing is loaded from `/fonts/`. Times New Roman is a system face on macOS and Windows; Linux
+  falls back to Liberation Serif or Tinos. `static` output therefore ships no binary font at all.
 - `public/.nojekyll` must stay: Astro emits `_astro/`, which Jekyll would otherwise drop.
 - `.frame--hit` is derived from the figure's own border colour, never asserted by hand. 10 of 20.
 
