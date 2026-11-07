@@ -4,6 +4,8 @@
 
 **G**lobal-**L**ocal **A**greement-**W**eighted Dual-Feature Learning for Text-Based Person Search
 
+[Project page](https://bili186.github.io/GLAW/)
+
 ## Method Overview
 
 GLAW tackles **Text-Based Person Search (TBPS)** — retrieving person images from a gallery using natural language descriptions. Our framework combines three novel components built on CLIP ViT-B/16:
