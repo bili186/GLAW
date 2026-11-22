@@ -5,7 +5,7 @@ import { mechanisms } from '../data/content';
 <section class="panel" id="method">
   <div class="wrap">
     <div class="panel__head">
-      <span class="panel__num">01</span>
+      <span class="panel__num">02</span>
       <h2 class="panel__title">Mechanism</h2>
       <p class="mono panel__aside">four parts, one forward pass</p>
     </div>
@@ -25,7 +25,8 @@ import { mechanisms } from '../data/content';
     </div>
 
     <figure class="pipeline">
-      <svg viewBox="0 0 900 420" role="img" aria-labelledby="pipe-title pipe-desc">
+      <div class="pipeline__scroll">
+        <svg viewBox="0 0 900 420" role="img" aria-labelledby="pipe-title pipe-desc">
         <title id="pipe-title">GLAW forward pass</title>
         <desc id="pipe-desc">
           A person image and a text description pass through the CLIP ViT-B/16 image encoder and the
@@ -44,7 +45,7 @@ import { mechanisms } from '../data/content';
             markerHeight="6"
             orient="auto-start-reverse"
           >
-            <path d="M0,0 L10,5 L0,10 z" fill="#38527d"></path>
+            <path d="M0,0 L10,5 L0,10 z" fill="#b7b7af"></path>
           </marker>
         </defs>
 
@@ -82,8 +83,8 @@ import { mechanisms } from '../data/content';
                 y="154"
                 width="8"
                 height="8"
-                fill={[1, 4, 7].includes(i) ? 'var(--select)' : 'none'}
-                stroke="#38527d"
+                fill={[1, 4, 7].includes(i) ? 'var(--accent)' : 'none'}
+                stroke="#b7b7af"
                 stroke-width="1"
               />
             ))
@@ -114,7 +115,8 @@ import { mechanisms } from '../data/content';
 
         <rect class="box" x="610" y="352" width="250" height="52"></rect>
         <text x="735" y="383" text-anchor="middle">centroid loss</text>
-      </svg>
+        </svg>
+      </div>
       <figcaption>
         Selection sits between the encoders and the feature that is classified: cross-modal attention
         ranks both modalities, the top 30% feed the local branch, and the global branch keeps

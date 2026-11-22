@@ -4,72 +4,80 @@
 
 ## World
 
-**A contact sheet on a dark table.** The page is not a poster about a retrieval model; it is the
-proof sheet a photographer would lay down after a shoot — frames in order, printed frame numbers,
-and grease-pencil marks on the frames that are the person asked for. The visitor reads the result
-before reading a single claim about the method.
+**A white gallery wall, and a proof that assembles itself.** The page opens on a fixed 1440 × 900
+stage: twelve prints lie in a pile under a wide, flat scanning frame. As the visitor scrolls, the
+frame opens out, the prints travel to their own places on the wall, and four annotations appear in
+the left margin — one for each reading of the same search. The title never moves; it sits at the
+lower left of the stage, a caption to the picture that is being made.
 
-The scene supplies every material: the room is dark navy (the same navy as the logo ground), the
-sheet is cool paper, and the only saturated colour is the mark — the logo's cyan, used exactly where
-the logo uses it, on the selected token.
+Nothing is skeuomorphic. The paper is white, the ink is black, the rules are hairlines, and the only
+saturated colour is the logo's cyan, used where a selection is actually being made.
 
 ## Palette
 
 | Token | Value | Role |
 |---|---|---|
-| `--navy-800` | `#0A1526` | page ground, from the logo's outer ground |
-| `--navy-700` | `#132647` | logo inner navy; used only inside the mark |
-| `--sheet` | `#EDEFF2` | the proof sheet. Cool paper — deliberately not cream |
-| `--sheet-ink` | `#0F1928` | print on the sheet |
-| `--sheet-muted` | `#57677D` | printed annotations, 5.4:1 on the sheet |
-| `--select` | `#38BDF8` | the logo cyan: marks, rules, code, links on navy |
-| `--select-deep` | `#0284C7` | bracket strokes and the one accent word (3.5:1, graphic + large text) |
-| `--select-ink` | `#0B5C86` | cyan that must carry small text: frame numbers, R@1 column (6.3:1) |
+| `--paper` | `#FFFFFF` | the wall |
+| `--paper-2` | `#F7F7F5` | command block, quiet fills |
+| `--ink` | `#111111` | headings, body emphasis |
+| `--ink-2` | `#3A3A38` | running copy |
+| `--muted` | `#75756F` | annotations, metadata, captions |
+| `--rule` | `#E6E6E2` | section rules, table rows |
+| `--accent` | `#0284C7` | the selection frame and handles, hit brackets |
+| `--accent-ink` | `#0B5C86` | cyan that carries small text: links, R@1, labels |
 
-Cyan is the only hue. Everything else is navy, paper, or grey. Emphasis inside a table or a heading
-is carried by weight and rule, never by a second accent colour.
+Cyan is the only hue and it always means *selected*. Everything else is black, grey or white.
 
 ## Type
 
-One family, three sizes of voice: **Times New Roman** throughout (`Times`, `Liberation Serif`,
-`Tinos`, `serif` as fallbacks). The sheet is a printed page, so its type is the type of a printed
-page — no display grotesk, no mono, no webfont fetched at runtime.
+One family: **Times New Roman** (`Times`, `Liberation Serif`, `Tinos`, `serif`). No webfont is
+loaded; the static output ships no font binary.
 
-- **Display:** the family at `clamp(2.1rem, 5.4vw, 4.05rem)`, leading `1.02`, tracking `-.012em`.
-  The title and section names only.
-- **Body:** the same family at `1.0625rem/1.6` for mechanism copy, captions and notes.
-- **Data:** the same family, uppercase at `0.75rem` with `0.05em` tracking, for frame numbers,
-  metrics, keys and commands. Separated by size, tracking and colour — not by family.
+- **Display:** 50px on the stage, `clamp(2.1rem, 4.6vw, 3.3rem)` in sections, `line-height` 1.0–1.04,
+  tracking `-0.015em`. Title, section names, the citation stamp.
+- **Body:** 17px / 1.65 for mechanism copy, captions and notes; 15px for query captions.
+- **Data:** the same family at 11px, uppercase, `0.12em` tracking — frame numbers, metric headers,
+  metadata. Separated by size, tracking and colour, never by family.
 
-Hierarchy is size, weight and rule — no letterspaced eyebrow labels above headings.
+Emphasis inside the title is italic, the way an editorial page marks a word — not a second colour.
 
 ## Layout
 
-A 1240px sheet inside a dark ground, with a printed header band (mark left, run data right). The
-title is flush left at display size, then byline, then the two actions, then the strips.
+The opening is a 1440 × 900 stage scaled by `min(vw / 1440, vh / 900)` and centred, so every screen
+sees the same composition, letterboxed when the aspect ratio differs. The scroll length is 240vh;
+`p` runs 0 → 1 and every element reads from it.
 
-Frames sit in a 10-column grid, 5px gutters, reflowing to 5 columns below 720px so a frame is never
-cut in half. Sections are numbered `01`–`04` in small uppercase type at the left of a rule; the
-section name is the only thing in display size on that line.
+The title sits at `120, 452`, the byline and actions beneath it, the four annotations in the left
+margin at `120, 104 → 430`. The prints live on the right: a pile around `625–967 × 65–495` at rest,
+four columns from `690` to `1428` at the end. Sections below use a 1180px measure and are numbered
+`01`–`05`.
 
 ## Marks and motion
 
-- **Select mark:** two cyan bracket corners on the frame — top-left and bottom-right, inset 3px. No
-  border, no badge, no tint. On hover the print lifts 3px and the brackets grow; nothing else moves.
-- **Develop:** frames rise 10px and fade in with a 34ms stagger, once, on load. This is the only
-  authored motion; `prefers-reduced-motion` removes it.
+- **Scan frame:** `400, 183, 789 × 193` at rest → `412, 261, 1151 × 601` at the end, eight square
+  handles, fading out between `p = 0.32` and `0.62`.
+- **Prints:** each has its own `from`/`to` box, z-layer and fade. Rotation is set by depth
+  (`z ≥ 12 → 8°`, `z ≥ 8 → 4.5°`, `z ≥ 4 → 1.8°`, else `-3°`). Opacity is
+  `fade × 0.95 → 1` over `p = 0.06 → 0.88`.
+- **Annotations:** leader lines fade in at `p = 0.55 → 0.95`, labels at `p = 0.86 → 1`. Hovering a
+  label or a print after `p = 0.85` keeps its group in colour and takes the rest to 30% grey.
+- **Develop:** the twenty retrieval frames still rise 10px and fade in on load, once.
 
 ## Constraints worth remembering
 
-- Nothing is loaded from `/fonts/`. Times New Roman is a system face on macOS and Windows; Linux
-  falls back to Liberation Serif or Tinos. `static` output therefore ships no binary font at all.
+- The stage is the only absolute coordinate system. Every opening value is authored in its 1440 × 900
+  space, then transformed; never mix viewport units into it.
+- Below 720px the opening becomes a normal page: the stage stops scaling, the twelve prints become a
+  3 × 4 grid, the frame and leader lines are removed, and the annotations flow under the grid.
+- `prefers-reduced-motion` paints the settled state and skips the scroll listener.
 - `public/.nojekyll` must stay: Astro emits `_astro/`, which Jekyll would otherwise drop.
 - `.frame--hit` is derived from the figure's own border colour, never asserted by hand. 10 of 20.
 
 ## Sources
 
 - `assets/logo.svg` — the mark, its navy and its cyan (binding).
-- `figs/fig_retrieval.png` — sliced into 20 frames by border colour; the marks on the page are the
-  figure's own truth, not a redrawing.
-- Binding donors named at roll time: the darkroom's sequential emergence (the develop sweep) and
-  ligne claire's single line weight (every rule, box and bracket on the page is 1.25–2px).
+- `figs/fig_retrieval.png` — sliced into 20 frames by border colour; the twelve prints in the opening
+  and the twenty frames in `01 Retrieval` are the figure's own truth, not a redrawing.
+- The scroll grammar — a fixed stage, a scanning frame, prints that travel from a pile to a
+  composition, and margin annotations that resolve last — follows StepFun's homepage opening,
+  rebuilt here with our own assets and our own numbers.

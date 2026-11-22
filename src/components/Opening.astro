@@ -1,0 +1,263 @@
+---
+import { SITE } from '../data/content';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+type Paper = {
+  file: string;
+  rank: number;
+  correct: boolean;
+  group: number;
+  from: [number, number, number, number];
+  to: [number, number, number, number];
+  z: number;
+  fade: 'in' | 'out' | 'none';
+};
+
+// 12 of the 20 RSTPReid frames. `from` is the pile, `to` the scattered proof.
+// Coordinates live on a fixed 1440 × 900 stage that is scaled to the viewport.
+const papers: Paper[] = [
+  { file: 'frame-101.jpg', rank: 1, correct: true, group: 1, from: [625, 95, 205, 295], to: [690, 120, 150, 218], z: 2, fade: 'none' },
+  { file: 'frame-102.jpg', rank: 2, correct: true, group: 1, from: [665, 65, 200, 290], to: [704, 372, 156, 226], z: 3, fade: 'none' },
+  { file: 'frame-103.jpg', rank: 3, correct: true, group: 1, from: [705, 115, 215, 305], to: [718, 626, 150, 218], z: 4, fade: 'out' },
+  { file: 'frame-104.jpg', rank: 4, correct: false, group: 2, from: [630, 160, 200, 290], to: [872, 68, 160, 232], z: 5, fade: 'none' },
+  { file: 'frame-105.jpg', rank: 5, correct: true, group: 2, from: [672, 132, 210, 300], to: [900, 330, 168, 244], z: 6, fade: 'none' },
+  { file: 'frame-110.jpg', rank: 10, correct: true, group: 2, from: [712, 92, 220, 312], to: [910, 598, 152, 220], z: 7, fade: 'none' },
+  { file: 'frame-201.jpg', rank: 1, correct: true, group: 3, from: [645, 192, 195, 280], to: [1078, 104, 146, 212], z: 8, fade: 'none' },
+  { file: 'frame-202.jpg', rank: 2, correct: true, group: 3, from: [688, 170, 215, 300], to: [1108, 352, 156, 226], z: 9, fade: 'in' },
+  { file: 'frame-203.jpg', rank: 3, correct: true, group: 3, from: [730, 158, 210, 295], to: [1098, 604, 160, 232], z: 10, fade: 'none' },
+  { file: 'frame-205.jpg', rank: 5, correct: true, group: 4, from: [665, 105, 185, 268], to: [1264, 166, 138, 200], z: 11, fade: 'in' },
+  { file: 'frame-206.jpg', rank: 6, correct: true, group: 4, from: [710, 205, 200, 290], to: [1296, 398, 132, 192], z: 12, fade: 'none' },
+  { file: 'frame-207.jpg', rank: 7, correct: false, group: 4, from: [752, 120, 215, 305], to: [1286, 636, 140, 204], z: 13, fade: 'out' },
+];
+
+const rotation = (z: number) => (z >= 12 ? 8 : z >= 8 ? 4.5 : z >= 4 ? 1.8 : -3);
+
+const labels = [
+  { en: ['From A Sentence', 'To One Person'], zh: '从一句话，到一个人', meta: 'Query A · top 3' },
+  { en: ['From Ten Frames', 'To A Ranking'], zh: '从十张候选，到一个排序', meta: 'Query A · tail' },
+  { en: ['From A Face', 'To A Match'], zh: '从一张脸，到一次命中', meta: 'Query B · top 3' },
+  { en: ['From A Miss', 'To The Gap'], zh: '从一次认错，到差距', meta: 'Query B · tail' },
+];
+---
+
+<section class="opening" id="top" data-opening>
+  <div class="opening__pin">
+    <div class="stage" data-stage>
+      <header class="stage__bar">
+        <a class="mark" href="#top">
+          <img src={`${base}logo.svg`} alt="" width="22" height="22" />
+          <b>GLAW</b>
+        </a>
+        <p class="stage__meta">Text-based person search · CLIP ViT-B/16</p>
+      </header>
+
+      <div class="hero">
+        <h1 class="claim">
+          Global&#8209;Local Agreement&#8209;Weighted Dual&#8209;Feature Learning <em>for</em>
+          Text&#8209;Based Person Search
+        </h1>
+        <p class="byline">{SITE.authors}<sup class="star">*</sup></p>
+        <p class="note">* corresponding author</p>
+        <div class="acts">
+          <a class="btn btn--go" href={SITE.repo}>Code <span aria-hidden="true">↗</span></a>
+          <a class="link" href="#method">Method</a>
+          <a class="link" href="#results">Results</a>
+        </div>
+      </div>
+
+      <div class="papers">
+        {
+          papers.map((p, i) => (
+            <figure
+              class="paper"
+              data-paper
+              data-group={p.group}
+              data-fade={p.fade}
+              data-from={p.from.join(',')}
+              data-to={p.to.join(',')}
+              style={`left:${p.from[0]}px;top:${p.from[1]}px;width:${p.from[2]}px;height:${p.from[3]}px;z-index:${p.z};--rot:${rotation(p.z)}deg`}
+            >
+              <img
+                src={`${base}frames/${p.file}`}
+                alt={`Query ${p.group <= 2 ? 'A' : 'B'}, rank ${p.rank}: ${p.correct ? 'the identity described' : 'a different identity'}`}
+                width={p.to[2]}
+                height={p.to[3]}
+                loading={i < 6 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+              <figcaption class="paper__no">
+                {`${p.group <= 2 ? 'A' : 'B'}${String(p.rank).padStart(2, '0')}`}
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+
+      <svg class="leaders" viewBox="0 0 1440 900" aria-hidden="true">
+        <line x1="470" y1="124" x2="690" y2="229"></line>
+        <line x1="470" y1="212" x2="872" y2="184"></line>
+        <line x1="470" y1="300" x2="1078" y2="210"></line>
+        <line x1="470" y1="388" x2="1264" y2="266"></line>
+        <circle cx="690" cy="229" r="2.5"></circle>
+        <circle cx="872" cy="184" r="2.5"></circle>
+        <circle cx="1078" cy="210" r="2.5"></circle>
+        <circle cx="1264" cy="266" r="2.5"></circle>
+      </svg>
+
+      <div class="marquee" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="labels">
+        {
+          labels.map((l, i) => (
+            <div class="label" data-label data-group={i + 1}>
+              <span class="label__no">{`0${i + 1}`}</span>
+              <span>
+                <span class="label__en">
+                  {l.en[0]}
+                  <br />
+                  {l.en[1]}
+                </span>
+                <span class="label__zh">{l.zh}</span>
+                <span class="label__meta">{l.meta}</span>
+              </span>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="hint" data-hint>Scroll <span aria-hidden="true">↓</span></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const opening = document.querySelector<HTMLElement>('[data-opening]');
+  if (opening) {
+    const stage = opening.querySelector<HTMLElement>('[data-stage]')!;
+    const marquee = opening.querySelector<HTMLElement>('.marquee')!;
+    const labels = [...opening.querySelectorAll<HTMLElement>('[data-label]')];
+    const hint = opening.querySelector<HTMLElement>('[data-hint]')!;
+    const papers = [...opening.querySelectorAll<HTMLElement>('[data-paper]')].map((el) => ({
+      el,
+      group: el.dataset.group,
+      fade: el.dataset.fade,
+      from: el.dataset.from!.split(',').map(Number),
+      to: el.dataset.to!.split(',').map(Number),
+    }));
+
+    const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+    const seg = (p: number, a: number, b: number) => clamp((p - a) / (b - a), 0, 1);
+    const smooth = (t: number) => t * t * (3 - 2 * t);
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mobile = matchMedia('(max-width: 720px)');
+
+    let current = 0;
+    let target = 0;
+    let frame = 0;
+
+    const fit = () => {
+      const s = Math.min(innerWidth / 1440, innerHeight / 900);
+      stage.style.setProperty('--s', s.toFixed(4));
+    };
+
+    const paint = (p: number) => {
+      const t = smooth(p);
+
+      for (const { el, fade, from, to } of papers) {
+        el.style.left = `${lerp(from[0], to[0], t)}px`;
+        el.style.top = `${lerp(from[1], to[1], t)}px`;
+        el.style.width = `${lerp(from[2], to[2], t)}px`;
+        el.style.height = `${lerp(from[3], to[3], t)}px`;
+        const base = fade === 'out' ? 1 - seg(p, 0.24, 0.72) : fade === 'in' ? seg(p, 0.24, 0.76) : 1;
+        el.style.opacity = (base * lerp(0.95, 1, seg(p, 0.06, 0.88))).toFixed(3);
+      }
+
+      marquee.style.transform = `translate(${lerp(400, 412, t)}px, ${lerp(183, 261, t)}px)`;
+      marquee.style.width = `${lerp(789, 1151, t)}px`;
+      marquee.style.height = `${lerp(193, 601, t)}px`;
+      marquee.style.opacity = (1 - seg(p, 0.32, 0.62)).toFixed(3);
+
+      const lines = seg(p, 0.55, 0.95);
+      (opening.querySelector('.leaders') as HTMLElement).style.opacity = lines.toFixed(3);
+
+      const on = seg(p, 0.86, 1);
+      for (const l of labels) l.style.opacity = on.toFixed(3);
+      (opening.querySelector('.labels') as HTMLElement).style.transform = `translateY(${lerp(12, 0, on)}px)`;
+
+      hint.style.opacity = (1 - seg(p, 0.02, 0.12)).toFixed(3);
+    };
+
+    const tick = () => {
+      if (mobile.matches) return;
+      const max = opening.offsetHeight - innerHeight;
+      target = max > 0 ? clamp(-opening.getBoundingClientRect().top / max, 0, 1) : 1;
+      if (reduced) {
+        current = 1;
+        target = 1;
+      }
+      current = lerp(current, target, 0.16);
+      if (Math.abs(target - current) < 0.0005) current = target;
+      paint(current);
+      frame = current === target ? 0 : requestAnimationFrame(tick);
+    };
+
+    const request = () => {
+      if (!frame) frame = requestAnimationFrame(tick);
+    };
+
+    const setFocus = (group?: string) => {
+      if (current < 0.85) return;
+      if (group) stage.dataset.focus = group;
+      else delete stage.dataset.focus;
+    };
+
+    for (const el of [...papers.map((p) => p.el), ...labels]) {
+      el.addEventListener('mouseenter', () => setFocus(el.dataset.group));
+      el.addEventListener('mouseleave', () => setFocus());
+    }
+
+    const clear = () => {
+      stage.style.removeProperty('--s');
+      for (const p of papers) {
+        p.el.style.left = '';
+        p.el.style.top = '';
+        p.el.style.width = '';
+        p.el.style.height = '';
+        p.el.style.opacity = '';
+      }
+      marquee.style.transform = '';
+      marquee.style.width = '';
+      marquee.style.height = '';
+      marquee.style.opacity = '';
+      (opening.querySelector('.labels') as HTMLElement).style.transform = '';
+      (opening.querySelector('.leaders') as HTMLElement).style.opacity = '';
+      hint.style.opacity = '';
+    };
+
+    const boot = () => {
+      if (mobile.matches) {
+        clear();
+        return;
+      }
+      fit();
+      current = 0;
+      paint(0);
+      tick();
+    };
+
+    addEventListener('scroll', request, { passive: true });
+    addEventListener('resize', () => {
+      if (!mobile.matches) {
+        fit();
+        request();
+      }
+    });
+    mobile.addEventListener('change', boot);
+    boot();
+  }
+</script>

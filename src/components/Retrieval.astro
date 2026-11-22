@@ -1,0 +1,56 @@
+---
+import { queries } from '../data/content';
+import frames from '../data/frames.json';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const rows = [1, 2].map((row) =>
+  frames.filter((f) => f.row === row).sort((a, b) => a.rank - b.rank)
+);
+const hits = frames.filter((f) => f.correct).length;
+---
+
+<section class="panel" id="retrieval">
+  <div class="wrap">
+    <div class="panel__head">
+      <span class="panel__num">01</span>
+      <h2 class="panel__title">Retrieval</h2>
+      <p class="mono panel__aside">RSTPReid test · top-10 per query · {hits}/{frames.length} frames match</p>
+    </div>
+
+    <div class="strips">
+      {
+        rows.map((row, ri) => (
+          <div class="strip">
+            <div class="strip__query">
+              <span class="strip__tag">{queries[ri].tag}</span>
+              <p class="strip__text">{queries[ri].text}</p>
+            </div>
+            <ol class="strip__grid">
+              {row.map((f, i) => (
+                <li class:list={['frame', f.correct && 'frame--hit']} style={`--i:${ri * 10 + i}`}>
+                  <div class="shot">
+                    <img
+                      src={`${base}frames/${f.file}`}
+                      alt={`Rank ${f.rank}: ${f.correct ? 'the identity described' : 'a different identity'}`}
+                      width={f.w}
+                      height={f.h}
+                      loading={ri === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  </div>
+                  <span class="cap">{String(f.rank).padStart(2, '0')}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
+
+      <div class="sheet__legend mono">
+        <span class="key"><i class="hit"></i> same identity as described</span>
+        <span class="key"><i class="miss"></i> a different identity</span>
+        <span class="key">captions verbatim from RSTPReid</span>
+      </div>
+    </div>
+  </div>
+</section>

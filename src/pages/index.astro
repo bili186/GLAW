@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import Sheet from '../components/Sheet.astro';
+import Opening from '../components/Opening.astro';
+import Retrieval from '../components/Retrieval.astro';
 import Method from '../components/Method.astro';
 import Results from '../components/Results.astro';
 import Run from '../components/Run.astro';
@@ -10,7 +11,8 @@ import { SITE } from '../data/content';
 
 <Base title={SITE.title} description={SITE.description}>
   <main>
-    <Sheet />
+    <Opening />
+    <Retrieval />
     <Method />
     <Results />
     <Run />
